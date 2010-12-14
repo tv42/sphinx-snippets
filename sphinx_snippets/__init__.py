@@ -41,6 +41,19 @@ def doctree_resolved(app, doctree, docname):
             # TODO avoid re-processing it
             doc = env.read_doc(page, save_parsed=False)
             for section in doc.traverse(nodes.section):
+                title = section.traverse(nodes.title)[0]
+                relative = app.builder.get_relative_uri(
+                    from_=docname,
+                    to=page,
+                    )
+                ref = nodes.reference(
+                    internal=True,
+                    refuri=relative,
+                    anchorname='#' + section['ids'][0],
+                    )
+                ref.extend(title.children)
+                title[:] = [ref]
+
                 l.append(section)
 
         l.reverse()
