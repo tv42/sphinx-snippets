@@ -4,7 +4,7 @@ setup(
     name='sphinx_snippets',
     author='Tommi Virtanen',
     author_email='tv@eagain.net',
-    description='Better include directive for Sphinx',
+    description='Include other pages snippets in a current page, in Sphinx',
     version='0.1',
     install_requires=[
         'setuptools',
