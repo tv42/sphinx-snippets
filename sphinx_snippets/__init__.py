@@ -54,6 +54,12 @@ def doctree_resolved(app, doctree, docname):
                 ref.extend(title.children)
                 title[:] = [ref]
 
+                # we're reintroducing pending_xref's into the document
+                # after they've supposed to have been resolved
+                # already, we must resolve them here or they'll be
+                # unexpected later on and cause a failure
+                env.resolve_references(section, docname, app.builder)
+
                 l.append(section)
 
         l.reverse()
